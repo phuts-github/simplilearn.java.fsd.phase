@@ -5,4 +5,4 @@
  * @author phuthinhotmail
  *
  */
-package com.typecasting;
+package com.simplilearn.typecasting;

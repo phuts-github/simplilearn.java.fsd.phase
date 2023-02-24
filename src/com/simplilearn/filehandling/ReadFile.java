@@ -6,8 +6,10 @@ public class ReadFile {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String filePath = "/home/phuthinhotmail/eclipse-workspace/simplilearn-java-fsd-phase1/";
-		
+//		String filePath = "/home/phuthinhotmail/eclipse-workspace/simplilearn-java-fsd-phase1/";
+		String filePath = "C:/Users/phuth/git/simplilearn.java.fsd.phase1/";
+
+
 		Scanner fileReader = new Scanner (filePath + "testFile.txt");
 		
 		try {
