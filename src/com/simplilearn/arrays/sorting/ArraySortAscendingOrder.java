@@ -7,9 +7,8 @@ public class ArraySortAscendingOrder {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		Double[] array = {10.,5.,8.1,20.,20.00,13.5,30.01};
-		
+
+		int array[] = new int [] {10,5,8,2,20,13,30};
 		
 		System.out.println("Array before the sorting");
 		
@@ -17,7 +16,7 @@ public class ArraySortAscendingOrder {
 			System.out.print(array[i] + " ");
 		}
 		
-		Arrays.sort(array, Collections.reverseOrder());
+		Arrays.sort(array);
 		
 		System.out.println();
 		System.out.println("Array after the sorting");
