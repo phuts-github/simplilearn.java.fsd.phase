@@ -17,13 +17,12 @@ public class ArraysLongestIncreasingSubsequence {
 		System.out.println("Array values before finding longest increasing subsequnce");
 		for (int i=0; i<lengthArray;i++) {
 			System.out.print(array[i] + " ");
-			
 		}
 
 		System.out.println();
 		System.out.println("Array values after finding longest increasing subsequnce");
 		longestIncreasinSubsequence (array, lengthArray);
-		
+
 
 //		for (int i=0; i<lengthArray;i++) {
 //			System.out.print(array[i] + " ");
@@ -59,6 +58,9 @@ public class ArraysLongestIncreasingSubsequence {
 		
 		System.out.println();
 		System.out.println("Array length : " + list.length);
+//		for (i=0; i<list.length;i++) {
+//			System.out.print(list[i] + " ");
+//		}
 	}
 
 }

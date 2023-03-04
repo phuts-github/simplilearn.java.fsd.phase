@@ -1,4 +1,4 @@
-package com.simplilearn.project1;
+package com.simplilearn.file.list;
 
 import java.io.File;
 import java.util.List;
@@ -22,9 +22,5 @@ public class DirectoryFileList {
             }
         }
     }
-
-
-
-
 
 }
