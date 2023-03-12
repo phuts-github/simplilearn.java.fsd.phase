@@ -8,7 +8,9 @@ import java.util.Scanner;
 public class VirtualKey {
 
     public static void main(String[] args) {
-        File folder = new File(Constants.folderPath);
+        printWelcomeMessage();
+
+        File folder = new File(Constants.FOLDER_PATH);
         File[] listOfFolderFiles = null;
 
         // loading initial file list. The list will be refreshed based on functions selected.
@@ -19,7 +21,7 @@ public class VirtualKey {
         while (!selectedMainMenuOption.equals(Constants.Q_QUIT_APPLICATION)) {
 
             printMainMenu();
-            System.out.print("\nEnter your choice:\t");
+            System.out.print(Constants.ENTER_MENU_CHOICE);
             selectedMainMenuOption = sc.nextLine().toUpperCase();
 
             switch (selectedMainMenuOption) {
@@ -34,13 +36,13 @@ public class VirtualKey {
                     closeApp();
                 }
                 default -> {
-                    System.out.println("You have entered an invalid choice!\nTry again!\n");
+                    System.out.println(Constants.INVALID_CHOICE_ENTERED);
                 }
             }
         }
     }
     private static void closeApp() {
-        System.out.println("\tClosing your application... \n\tThank you!");
+        System.out.println(Constants.CLOSING_APP);
     }
     private static File[] retrieveFileList(File folder, File[] listOfFolderFiles) {
         listOfFolderFiles = folder.listFiles();
@@ -49,12 +51,9 @@ public class VirtualKey {
             if (countOfFilesFound > 1) {
                 Arrays.stream(listOfFolderFiles).sorted();
             }
-
-            System.out.println("\nFiles found int the folder is - " + countOfFilesFound + "\n");
             return listOfFolderFiles;
-
         } else {
-            System.out.println("\nFolder has no files in it,\n\tFolder path - " + folder);
+            System.out.println(Constants.FOLDER_HAS_NO_FILES + folder);
         }
         return null;
     }
@@ -62,25 +61,31 @@ public class VirtualKey {
 
         int countOfFilesFound = listOfFolderFiles.length;
 
-        System.out.println("\nFiles found int the folder is - " + countOfFilesFound + "\n");
+        System.out.println(Constants.FOLDER_FILE_COUNT + countOfFilesFound);
 
         for (int i = 0; i < countOfFilesFound; i++) {
             if (listOfFolderFiles[i].isFile()) {
-                System.out.println("\t" + (i+1) + "\tFile\t: " + listOfFolderFiles[i].getName());
+                System.out.println("\t" + (i+1) + Constants.FILE + "\t: " + listOfFolderFiles[i].getName());
             } else if (listOfFolderFiles[i].isDirectory()) {
-                System.out.println("\t" + (i+1) + "\tFolder\t: " + listOfFolderFiles[i].getName());
+                System.out.println("\t" + (i+1) + Constants.FOLDER + "\t: " + listOfFolderFiles[i].getName());
             }
         }
     }
+    private static void printWelcomeMessage() {
+        for (String welcomeText : Constants.ARRAY_WELCOME_TEXT) {
+            System.out.print(welcomeText);
+        }
+        System.out.println();
+    }
     private static void printMainMenu() {
-        System.out.println("\n***********   Main Menu   ************\n");
-        for (String mainMenu : Constants.arrayMainMenu) {
+        System.out.println(Constants.message_MAIN_MENU_TEXT);
+        for (String mainMenu : Constants.ARRAY_MAIN_MENU) {
             System.out.println(mainMenu);
         }
     }
     private static void printFileHandlingMenu() {
-        System.out.println("\n*******   File Handling Menu   *******\n");
-        for (String fileHandlingMainMenu : Constants.arrayFileHandlingMainMenu) {
+        System.out.println(Constants.message_FILE_HANDLING_MENU_TEXT);
+        for (String fileHandlingMainMenu : Constants.ARRAY_FILE_HANDLING_MENU) {
             System.out.println(fileHandlingMainMenu);
         }
     }
@@ -91,51 +96,45 @@ public class VirtualKey {
         while (!selectedFileMenuOption.equals(Constants.M_MAIN_MENU)) {
 
             printFileHandlingMenu();
-            System.out.print("\nEnter your choice:\t");
+            System.out.print(Constants.ENTER_MENU_CHOICE);
             selectedFileMenuOption = sc.nextLine().toUpperCase();
 
             switch (selectedFileMenuOption) {
                 case Constants.A_ADD_FILE -> {
-                    System.out.println("Temp - add selected.\n");
                     if (addFile(folder)) {
                         listOfFolderFiles = retrieveFileList(folder, listOfFolderFiles);
                     }
                 }
                 case Constants.D_DELETE_FILE -> {
-                    System.out.println("Temp - delete selected.\n");
                     if (deleteFile(folder)) {
                         listOfFolderFiles = retrieveFileList(folder, listOfFolderFiles);
                     }
                 }
                 case Constants.S_SEARCH_FILE -> {
-                    System.out.println("Temp - search selected.\n");
                     searchFile(listOfFolderFiles);
                 }
                 case Constants.M_MAIN_MENU -> {
                 }
                 default -> {
-                    System.out.println("You have entered an invalid choice!\nTry again!\n");
+                    System.out.println(Constants.INVALID_CHOICE_ENTERED);
                 }
             }
         }
     }
     private static boolean addFile( File folder) {
-        System.out.println();
-        System.out.print("Enter the file name to add: \t");
-        System.out.println();
-
+        System.out.print(Constants.ENTER_FILE_NAME_TO_ADD);
         Scanner sc = new Scanner(System.in);
         String inputFileName = sc.nextLine();
 
-        File f1 = new File(folder + "/"+ inputFileName);
+        File f1 = new File(folder + Constants.FORWARD_SLASH + inputFileName);
 
         if (f1.exists()) {
-            System.out.println("\tFile '" + inputFileName + "' already exists.");
+            System.out.println(Constants.FILE + " '" + inputFileName + "'" + Constants.ALREADY_EXISTS);
             return false;
         } else {
             try {
                 f1.createNewFile();
-                System.out.println("\tFile '" + inputFileName + "' created");
+                System.out.println(Constants.FILE + " '" + inputFileName + "'" + Constants.CREATED);
                 return true;
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -143,48 +142,43 @@ public class VirtualKey {
         }
     }
     private static boolean deleteFile(File folder) {
-        System.out.println();
-        System.out.print("Enter the file name to delete: \t");
-        System.out.println();
-
+        System.out.print(Constants.ENTER_FILE_NAME_TO_DELETE);
         Scanner sc = new Scanner(System.in);
         String inputFileName = sc.nextLine();
 
-        File f1 = new File(folder + "/"+ inputFileName);
+        File f1 = new File(folder + Constants.FORWARD_SLASH + inputFileName);
 
         if (f1.exists()) {
             f1.delete();
-            System.out.println("\tFile deleted");
+            System.out.println(Constants.FILE + Constants.DELETED);
             return true;
         } else {
-            System.out.println("\tFile '" + inputFileName + "' not found");
+            System.out.println(Constants.FILE + " '" + inputFileName + "'" + Constants.NOT_FOUND);
             return false;
         }
     }
     private static void searchFile(File[] listOfFolderFiles) {
-
-        int arrayFileListLength = listOfFolderFiles.length;
-        System.out.println();
-        System.out.print("Enter the file name to search: \t");
-        System.out.println();
+        int arrayFileListLength;
+        arrayFileListLength = listOfFolderFiles.length;
 
         if (arrayFileListLength > 0) {
+            System.out.print(Constants.ENTER_FILE_NAME_TO_SEARCH);
             Scanner sc = new Scanner(System.in);
             String inputFileName = sc.nextLine();
             int i = 0;
 
             for (i = 0; i < arrayFileListLength; i++) {
-                if (listOfFolderFiles[i].getName().equalsIgnoreCase(inputFileName)) {
+                if (listOfFolderFiles[i].getName().equals(inputFileName)) {
                     break;
                 }
             }
             if (i != arrayFileListLength) {
-                System.out.println("File Name '" + inputFileName + "' was found");
+                System.out.println(Constants.FILE + " '" + inputFileName + "'" + Constants.FOUND);
             }else {
-                System.out.println("File Name '" + inputFileName + "' was not found\n");
+                System.out.println(Constants.FILE + " '" + inputFileName + "'" + Constants.NOT_FOUND);
             }
         } else {
-            System.out.println("There are no files to search from\n");
+             System.out.println(Constants.NO_FILES_TO_SEARCH_FROM);
         }
     }
 }

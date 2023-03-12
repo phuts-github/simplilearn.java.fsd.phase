@@ -23,11 +23,11 @@ public class ArraysLongestIncreasingSubsequence {
 		System.out.println("Array values after finding longest increasing subsequnce");
 		longestIncreasinSubsequence (array, lengthArray);
 
+		System.out.println();
+		for (int i=0; i<lengthArray;i++) {
+			System.out.print(array[i] + " ");
 
-//		for (int i=0; i<lengthArray;i++) {
-//			System.out.print(array[i] + " ");
-//			
-//		}
+		}
 		
 	}
 	
@@ -58,9 +58,9 @@ public class ArraysLongestIncreasingSubsequence {
 		
 		System.out.println();
 		System.out.println("Array length : " + list.length);
-//		for (i=0; i<list.length;i++) {
-//			System.out.print(list[i] + " ");
-//		}
+		for (i=0; i<list.length;i++) {
+			System.out.print(list[i] + " ");
+		}
 	}
 
 }
